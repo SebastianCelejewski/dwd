@@ -17,15 +17,21 @@ function App() {
     client.models.Todo.create({ content: window.prompt("Nowy pomiar") });
   }
 
+  function deleteTodo(id: string) {
+    client.models.Todo.delete({id})
+  }
+
   return (
     <main>
       <h1>Duszności Wczesnej Dorosłości</h1>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
+        {todos.map(todo => <li 
+            onClick={() => deleteTodo(todo.id)}
+            key={todo.id}>
+            {todo.content}
+          </li>)}
       </ul>
-      <button onClick={createTodo}>Dodaj nowy pomiar</button>
+      <button onClick={createTodo}>+</button>
     </main>
   );
 }
