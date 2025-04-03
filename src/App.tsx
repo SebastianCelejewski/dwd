@@ -14,22 +14,33 @@ function App() {
   }, []);
 
   function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Nowy pomiar") });
+    client.models.Todo.create({
+      content: window.prompt("Nowy pomiar"),
+      isDone: true
+    });
   }
 
   function deleteTodo(id: string) {
     client.models.Todo.delete({id})
   }
 
+  function Todo(todo: Todo) {
+    return <>
+            <li 
+              onClick={() => deleteTodo(todo.id)}
+              key={todo.id}>
+              {todo.content}
+            </li>
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked={todo.isDone}/>
+            <label for="vehicle1"> I have a bike</label>
+          </>
+  }
+
   return (
     <main>
       <h1>Duszności Wczesnej Dorosłości</h1>
       <ul>
-        {todos.map(todo => <li 
-            onClick={() => deleteTodo(todo.id)}
-            key={todo.id}>
-            {todo.content}
-          </li>)}
+        {todos.map(todo => Todo(todo))}
       </ul>
       <button onClick={createTodo}>+</button>
     </main>
