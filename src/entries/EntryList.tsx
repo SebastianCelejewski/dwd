@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { NavLink } from "react-router";
+
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 
@@ -40,6 +42,9 @@ function EntryList() {
 	      )}
 	  </ul>
 	  <button onClick={createTodo}>+</button>
+	  <nav>
+    	<NavLink to="/entries/new" end>Add entry</NavLink>
+      </nav>
     </>
   );
 
