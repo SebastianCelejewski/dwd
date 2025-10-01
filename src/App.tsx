@@ -1,5 +1,5 @@
 import EntryList from "./entries/EntryList.tsx"
-import AddEntry from "./entries/AddEntry.tsx"
+import EntryDetails from "./entries/EntryDetails.tsx"
 import { BrowserRouter, Routes, Route } from "react-router";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<EntryList />} />
           <Route path="/entries" element={<EntryList />} />
-          <Route path="/entries/:id" element={<AddEntry />} />
+          <Route path="/entries/:id" element={<EntryDetails />} />
         </Routes>
       </BrowserRouter>
     </main>

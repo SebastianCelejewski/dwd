@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
@@ -9,6 +9,7 @@ const client = generateClient<Schema>();
 
 function EntryList() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     client.models.Todo.observeQuery().subscribe({
@@ -27,19 +28,26 @@ function EntryList() {
     client.models.Todo.delete({id})
   }
 
+  function showTodo(id: string) {
+    navigate("/entries/{id}")
+  }
+
   return (
   	<>
 	  <ul>
-	    {todos.map(todo => <>
-	          <li 
-	            onClick={() => deleteTodo(todo.id)}
-	            key={todo.id}>
-	            {todo.content}
-	          </li>
-	          <input type="checkbox" id="vehicle1" name="vehicle1" value={todo.isDone}/>
-	          <label htmlFor="vehicle1"> I have a bike</label>
-	      </>
-	      )}
+	    {todos.map(todo => {
+        const inputElementId = "id-{todo.id}"
+        return <>
+            <li 
+              onClick={() => showTodo(todo.id)}
+              key={todo.id}>
+              {todo.content}
+            </li>
+            <input type="checkbox" id={inputElementId} name={inputElementId} value={todo.isDone}/>
+            <label htmlFor={inputElementId}> I have a bike</label>
+          </>
+        }
+	   )}
 	  </ul>
 	  <button onClick={createTodo}>+</button>
 	  <nav>
