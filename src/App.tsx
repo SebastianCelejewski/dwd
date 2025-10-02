@@ -4,6 +4,7 @@ import EntryList from "./entries/EntryList.tsx"
 import EntryDetails from "./entries/EntryDetails.tsx"
 import MeasurementList from "./measurements/measurementList.tsx"
 import MeasurementDetails from "./measurements/measurementDetails.tsx"
+import MeasurementAdd from "./measurements/measurementAdd.tsx"
 
 function App() {
 
@@ -14,9 +15,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MeasurementList />} />
           <Route path="/measurements" element={<MeasurementList />} />
+          <Route path="/measurements/new" element={<MeasurementAdd />} />
           <Route path="/measurements/:id" element={<MeasurementDetails />} />
-          <Route path="/entries" element={<EntryList />} />
-          <Route path="/entries/:id" element={<EntryDetails />} />
         </Routes>
       </BrowserRouter>
     </main>

@@ -8,7 +8,7 @@ import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 
 const client = generateClient<Schema>();
 
-function MeasurementDetails({loaderData}: Route.ComponentProps) {
+function MeasurementDetails() {
 	const params = useParams();
 	const measurementId = params["id"]
 

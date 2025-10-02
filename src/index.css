@@ -104,6 +104,12 @@ p {
   margin-bottom: 16px;
 }
 
+.verticalRadio {
+  display: inline-box;
+  width: 32px;
+  text-align: center;
+}
+
 #dyspnoeaNone {
   color: #ff57cf;
 }
