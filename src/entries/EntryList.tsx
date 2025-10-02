@@ -35,18 +35,18 @@ function EntryList() {
 
   return (
   	<>
-	  <ul>
+	  <ul class="entryList">
 	    {todos.map(todo => {
         const inputElementId = "id-{todo.id}"
-        return <>
-            <li 
-              onClick={() => showTodo(todo.id)}
-              key={todo.id}>
-              {todo.content}
+        return <li
+                  class="entryListElement"
+                  onClick={() => showTodo(todo.id)}
+                  key={todo.id}>
+              <p>{todo.id}</p>
+              <p>{todo.content}</p>
+              <input disabled="true" type="checkbox" id={inputElementId} name={inputElementId} value={todo.isDone}/>
+              <label htmlFor={inputElementId}> Completed</label>
             </li>
-            <input type="checkbox" id={inputElementId} name={inputElementId} value={todo.isDone}/>
-            <label htmlFor={inputElementId}> Completed</label>
-          </>
         }
 	   )}
 	  </ul>

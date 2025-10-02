@@ -29,7 +29,7 @@ function EntryDetails({loaderData}: Route.ComponentProps) {
 			</nav>
 		</>
 	} else {
-		return <>
+		return <div class="entryDetails">
 			<p>Entry details</p>
 			<p>{todo.content}</p>
 			<input type="checkbox" id="completedCheckbox" name="completedCheckbox" value={todo.isDone}/>
@@ -38,7 +38,7 @@ function EntryDetails({loaderData}: Route.ComponentProps) {
 			<nav>
 		  		<NavLink to="/entries" end>Back</NavLink>
 			</nav>
-		</>
+		</div>
 	}
 }
 
