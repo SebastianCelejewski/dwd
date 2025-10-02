@@ -6,53 +6,40 @@ import { generateClient } from "aws-amplify/data";
 
 const client = generateClient<Schema>();
 
-export async function loader({ params }: Route.LoaderArgs) {
-  console.log("/src/entries/AddEntry/loader()")
-  console.log("params: " + JSON.stringify(params))
-  return product;
-}
-
 function EntryDetails({loaderData}: Route.ComponentProps) {
-	console.log("/src/entries/AddEntry/AddEntry()")
-	console.log("loaderData: " + JSON.stringify(loaderData))
 	const params = useParams();
-	console.log("params: " + JSON.stringify(params))
-	const entryId = params["id"]
-	console.log("entryId: " + entryId)
+	const todoId = params["id"]
 
-	const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+	const [todo, setTodo] = useState<Schema["Todo"]["type"]>();
 
-	useEffect(() => {
-	    client.models.Todo.observeQuery().subscribe({
-	      next: (data) => setTodos([...data.items]),
-	    });
-	  }, []);
+	async function getTodo(todoId) {
+		return await client.models.Todo.get({ id: todoId });			
+	}
 
-	console.log(JSON.stringify(todos))
+	if (todo == undefined) {
+		getTodo(todoId).then((result) => {
+			setTodo(result["data"])
+		})
+	}
 
-	const entry = todos[entryId]
+	if (todo == undefined) {
+		return <>
+			<nav>
+		  		<NavLink to="/entries" end>Back</NavLink>
+			</nav>
+		</>
+	} else {
+		return <>
+			<p>Entry details</p>
+			<p>{todo.content}</p>
+			<input type="checkbox" id="completedCheckbox" name="completedCheckbox" value={todo.isDone}/>
+			<label htmlFor="completedCheckbox"> Completed</label>
 
-	return <>
-		<p>Entry details</p>
-		<nav>
-    		<NavLink to="/entries" end>Back</NavLink>
-      	</nav>
-	</>
+			<nav>
+		  		<NavLink to="/entries" end>Back</NavLink>
+			</nav>
+		</>
+	}
 }
-
-const entries = [
-  {
-    key: 0,
-    date: "2025-09-27 15:38",
-    value: 2,
-    comment: "elemele-dutki"
-  },
-  {
-    key: 1,
-    date: "2025-09-28 5:38",
-    value: 6,
-    comment: "trele-morele"
-  }
-];
 
 export default EntryDetails;

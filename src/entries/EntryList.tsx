@@ -29,7 +29,8 @@ function EntryList() {
   }
 
   function showTodo(id: string) {
-    navigate("/entries/{id}")
+    const navLink = `/entries/${id}`
+    navigate(navLink)
   }
 
   return (
@@ -44,7 +45,7 @@ function EntryList() {
               {todo.content}
             </li>
             <input type="checkbox" id={inputElementId} name={inputElementId} value={todo.isDone}/>
-            <label htmlFor={inputElementId}> I have a bike</label>
+            <label htmlFor={inputElementId}> Completed</label>
           </>
         }
 	   )}
