@@ -5,7 +5,26 @@ import { NavLink, useNavigate } from "react-router";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 
+import dyspnoeaNoneImagePath from "../assets/dyspnoeaNone.png";
+import dyspnoeaLowImagePath from "../assets/dyspnoeaLow.png";
+import dyspnoeaMediumImagePath from "../assets/dyspnoeaMedium.png";
+import dyspnoeaHighImagePath from "../assets/dyspnoeaHigh.png";
+
 const client = generateClient<Schema>();
+
+const valueImagePaths = [
+  dyspnoeaNoneImagePath,
+  dyspnoeaLowImagePath,
+  dyspnoeaMediumImagePath,
+  dyspnoeaHighImagePath
+]
+
+const valueDescriptions = [
+  "Brak duszności",
+  "Niewielkie duszności",
+  "Średnie duszności",
+  "Mocne duszności"
+]
 
 function MeasurementList() {
   const [measurements, setMeasurements] = useState<Array<Schema["Measurement"]["type"]>>([]);
@@ -17,19 +36,12 @@ function MeasurementList() {
     });
   }, []);
 
-  function currentDateAndTime() {
-      const d = new Date()
-      const date = d.toISOString().split('T')[0];
-      const time = d.toTimeString().split(' ')[0];
-      return `${date} ${time}`
-  }
-  
   function createMeasurement() {
     console.log("Creating new measurement")
     
     const newMeasurement = {
       dateTime: new Date().toISOString(),
-      value: 5,
+      value: 3,
       comment: window.prompt("Nowy pomiar")
     }
 
@@ -49,19 +61,26 @@ function MeasurementList() {
     navigate(navLink)
   }
 
+  function dateToString(date) {
+    return Intl
+           .DateTimeFormat(undefined, {dateStyle: "full", timeStyle: "short"})
+           .format(Date.parse(date))
+  }
+
   return (
   	<>
-	  <ul class="entryList">
+	  <ul className="entryList">
 	    {measurements.map(measurement => {
         const inputElementId = "id-{measurement.id}"
-        console.log("Measurement: " + JSON.stringify(measurement))
+        const valueImagePath = valueImagePaths[measurement.value]
+        const valueDescription = valueDescriptions[measurement.value]
+
         return <li
-                  class="entryListElement"
+                  className="entryListElement"
                   onClick={() => showTodo(measurement.id)}
                   key={measurement.id}>
-              <p>Data: {measurement.date}</p>
-              <p>Wartość: {measurement.value}</p>
-              <p>Komentarz: {measurement.comment}</p>
+              <p><span className="measurementDateTime">{dateToString(measurement.dateTime)}</span><span className="measurementValue"><img src={valueImagePath} alt={valueDescription}/></span></p>
+              <p className="measurementComment">{measurement.comment}</p>
             </li>
         }
 	   )}
