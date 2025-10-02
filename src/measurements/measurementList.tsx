@@ -4,27 +4,10 @@ import { NavLink, useNavigate } from "react-router";
 
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
-
-import dyspnoeaNoneImagePath from "../assets/dyspnoeaNone.png";
-import dyspnoeaLowImagePath from "../assets/dyspnoeaLow.png";
-import dyspnoeaMediumImagePath from "../assets/dyspnoeaMedium.png";
-import dyspnoeaHighImagePath from "../assets/dyspnoeaHigh.png";
+import { dateToString } from "../utils/dateUtils";
+import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 
 const client = generateClient<Schema>();
-
-const valueImagePaths = [
-  dyspnoeaNoneImagePath,
-  dyspnoeaLowImagePath,
-  dyspnoeaMediumImagePath,
-  dyspnoeaHighImagePath
-]
-
-const valueDescriptions = [
-  "Brak duszności",
-  "Niewielkie duszności",
-  "Średnie duszności",
-  "Mocne duszności"
-]
 
 function MeasurementList() {
   const [measurements, setMeasurements] = useState<Array<Schema["Measurement"]["type"]>>([]);
@@ -61,12 +44,6 @@ function MeasurementList() {
     navigate(navLink)
   }
 
-  function dateToString(date) {
-    return Intl
-           .DateTimeFormat(undefined, {dateStyle: "full", timeStyle: "short"})
-           .format(Date.parse(date))
-  }
-
   return (
   	<>
 	  <ul className="entryList">
@@ -77,7 +54,7 @@ function MeasurementList() {
 
         return <li
                   className="entryListElement"
-                  onClick={() => showTodo(measurement.id)}
+                  onClick={() => showMeasurement(measurement.id)}
                   key={measurement.id}>
               <p><span className="measurementDateTime">{dateToString(measurement.dateTime)}</span><span className="measurementValue"><img src={valueImagePath} alt={valueDescription}/></span></p>
               <p className="measurementComment">{measurement.comment}</p>

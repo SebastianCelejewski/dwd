@@ -3,6 +3,8 @@ import { NavLink, useParams } from "react-router";
 import type { Route } from "./+types/home";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
+import { dateToString } from "../utils/dateUtils";
+import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 
 const client = generateClient<Schema>();
 
@@ -29,9 +31,15 @@ function MeasurementDetails({loaderData}: Route.ComponentProps) {
 			</nav>
 		</>
 	} else {
+		console.log("measurement.date = " + measurement.dateTime)
 		return <div class="entryDetails">
-			<p>{measurement.date}</p>
-			<p>{measurement.value}</p>
+			<label>Data i godzina pomiaru</label>
+			<p>{dateToString(measurement.dateTime)}</p>
+
+			<label>Poziom duszności</label>
+			<p>{valueDescriptions[measurement.value]}</p>
+
+			<label>Okoliczności</label>
 			<p>{measurement.comment}</p>
 
 			<nav>
