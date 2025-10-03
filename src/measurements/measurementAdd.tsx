@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router";
 import type { Schema } from "../amplify/data/resource";
+
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router";
 import { generateClient } from "aws-amplify/data";
 import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 
@@ -70,7 +71,7 @@ function MeasurementAdd() {
 				</div>
 
 				<p className="label">Okoliczności</p>
-				<p><textarea id="measurementComment" className="newMeasurementTextArea" rows="5" onChange={handleMeasurementCommentChange}></textarea></p>
+				<p><textarea id="measurementComment" className="newMeasurementTextArea" rows={5} onChange={handleMeasurementCommentChange}/></p>
 			</div>
 			<button type="submit">Dodaj</button>
 		</form>

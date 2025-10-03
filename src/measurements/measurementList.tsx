@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-
-import { useNavigate } from "react-router";
-
 import type { Schema } from "../amplify/data/resource";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { generateClient } from "aws-amplify/data";
 import { dateToString } from "../utils/dateUtils";
 import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
