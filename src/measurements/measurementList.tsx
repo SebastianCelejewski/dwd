@@ -9,7 +9,7 @@ import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 const client = generateClient<Schema>();
 
 class MeasurementQueryResult {
-  data: Array<Schema["Measurement"]["type"]>
+  items: Array<Schema["Measurement"]["type"]>
 }
 
 function MeasurementList() {
