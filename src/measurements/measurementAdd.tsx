@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink, useParams } from "react-router";
-import type { Route } from "./+types/home";
+// import type { Route } from "./+types/home";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
-import { dateToString } from "../utils/dateUtils";
+//import { dateToString } from "../utils/dateUtils";
 import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 
 const client = generateClient<Schema>();

@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 
-import EntryList from "./entries/EntryList.tsx"
-import EntryDetails from "./entries/EntryDetails.tsx"
 import MeasurementList from "./measurements/measurementList.tsx"
 import MeasurementDetails from "./measurements/measurementDetails.tsx"
 import MeasurementAdd from "./measurements/measurementAdd.tsx"
