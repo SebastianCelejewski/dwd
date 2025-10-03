@@ -14,7 +14,7 @@ function MeasurementDetails() {
 
 	const [measurement, setMeasurement] = useState<Schema["Measurement"]["type"]>();
 
-	async function getMeasurement(measurementId: number) {
+	async function getMeasurement(measurementId: string) {
 		return await client.models.Measurement.get({ id: measurementId });
 	}
 

@@ -1,4 +1,5 @@
 import type { Schema } from "../amplify/data/resource";
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { generateClient } from "aws-amplify/data";
