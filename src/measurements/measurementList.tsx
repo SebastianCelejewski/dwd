@@ -10,11 +10,11 @@ const client = generateClient<Schema>();
 
 function MeasurementList() {
     const [measurements, setMeasurements] = useState<Array<Schema["Measurement"]["type"]>>([]);
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     
     useEffect(() => {
         client.models.Measurement.observeQuery({}).subscribe({
-            next: (data: any) => setMeasurements([...data.items]),
+            next: (data: object) => setMeasurements([...data.items]),
         });
     }, []);
 
@@ -29,8 +29,8 @@ function MeasurementList() {
     }
 
     return (
-      	<>
-        	  <ul className="entryList">
+          <>
+            <ul className="entryList">
             {measurements.map(measurement => {
                 const valueImagePath = valueImagePaths[measurement.value]
                 const valueDescription = valueDescriptions[measurement.value]
@@ -47,8 +47,8 @@ function MeasurementList() {
                         </div>
                       </li>
                 }
-	          )}
-	      </ul>
+            )}
+          </ul>
         <button onClick={createMeasurement}>+</button>
     </>
   );
