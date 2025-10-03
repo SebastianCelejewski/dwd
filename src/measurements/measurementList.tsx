@@ -14,8 +14,8 @@ function MeasurementList() {
     let navigate = useNavigate();
     
     useEffect(() => {
-        client.models.Measurement.observeQuery().subscribe({
-            next: (data) => setMeasurements([...data.items]),
+        client.models.Measurement.observeQuery({}).subscribe({
+            next: (data: any) => setMeasurements([...data.items]),
         });
     }, []);
 
@@ -33,7 +33,6 @@ function MeasurementList() {
       	<>
         	  <ul className="entryList">
             {measurements.map(measurement => {
-                const inputElementId = "id-{measurement.id}"
                 const valueImagePath = valueImagePaths[measurement.value]
                 const valueDescription = valueDescriptions[measurement.value]
 

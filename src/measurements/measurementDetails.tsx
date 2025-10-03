@@ -10,7 +10,7 @@ const client = generateClient<Schema>();
 
 function MeasurementDetails() {
 	const params = useParams();
-	const measurementId = params["id"]
+	const measurementIdParam = params["id"]
 
 	const [measurement, setMeasurement] = useState<Schema["Measurement"]["type"]>();
 
@@ -19,7 +19,7 @@ function MeasurementDetails() {
 	}
 
 	if (measurement == undefined) {
-		getMeasurement(measurementId).then((result) => {
+		getMeasurement(measurementIdParam).then((result) => {
 			setMeasurement(result["data"])
 		})
 	}

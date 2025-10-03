@@ -6,12 +6,7 @@ import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 
 const client = generateClient<Schema>();
 
-function MeasurementDetails() {
-	const params = useParams();
-	const measurementId = params["id"]
-
-	const [measurement, setMeasurement] = useState<Schema["Measurement"]["type"]>();
-
+function MeasurementAdd() {
 	const currentDateTimeUTC = new Date()
 	const timeZoneOffset = currentDateTimeUTC.getTimezoneOffset()
 	const currentDateTimeLocal = new Date(currentDateTimeUTC.getTime() - timeZoneOffset * 60 * 1000)
@@ -23,25 +18,22 @@ function MeasurementDetails() {
 	const [measurementValue, setMeasurementValue] = useState(0);
 	const [measurementComment, setMeasurementComment] = useState("");
 
-	function handleMeasurementValueChange(e) {
+	function handleMeasurementValueChange(e: any) {
+		console.log(e)
     	setMeasurementValue(e.target.value);
   	}
 
-	function handleMeasurementCommentChange(e) {
+	function handleMeasurementCommentChange(e: any) {
     	setMeasurementComment(e.target.value);
   	}
 
-  	function handleMeasurementDateTimeChange(e) {
+  	function handleMeasurementDateTimeChange(e: any) {
   		setMeasurementDateTime(e.target.value)
   	}
 
-	function handleSubmit(e) {
+	function handleSubmit(e: any) {
     	e.preventDefault();
 
-  		const localMeasurementDateTime = Date.parse(measurementDateTime + "Z")
-  		const timeZoneOffset = new Date().getTimezoneOffset()
-  		const utcMeasurementDateTime = localMeasurementDateTime + timeZoneOffset * 60 * 1000;
-  	
   		const newMeasurement = {
     		dateTime: new Date(measurementDateTime),
 		    value: measurementValue,
@@ -55,11 +47,6 @@ function MeasurementDetails() {
       		console.log("Response: " + JSON.stringify(returnedData))
       		navigate("/measurements")
     	})
-  	}
-
-  	function cancel() {
-  		const navLink = `/measurements`
-    	navigate(navLink)
   	}
 
 	return <>
@@ -94,4 +81,4 @@ function MeasurementDetails() {
 	</>
 }
 
-export default MeasurementDetails;
+export default MeasurementAdd;
