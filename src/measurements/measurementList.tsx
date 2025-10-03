@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { NavLink, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
@@ -10,69 +10,50 @@ import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 const client = generateClient<Schema>();
 
 function MeasurementList() {
-  const [measurements, setMeasurements] = useState<Array<Schema["Measurement"]["type"]>>([]);
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    client.models.Measurement.observeQuery().subscribe({
-      next: (data) => setMeasurements([...data.items]),
-    });
-  }, []);
-
-  function createMeasurement() {
-    console.log("Creating new measurement")
+    const [measurements, setMeasurements] = useState<Array<Schema["Measurement"]["type"]>>([]);
+    let navigate = useNavigate();
     
-    const newMeasurement = {
-      dateTime: new Date().toISOString(),
-      value: 3,
-      comment: window.prompt("Nowy pomiar")
+    useEffect(() => {
+        client.models.Measurement.observeQuery().subscribe({
+            next: (data) => setMeasurements([...data.items]),
+        });
+    }, []);
+
+    function createMeasurement() {
+        const navLink = `/measurements/new`
+        navigate(navLink)
     }
 
-    console.log("newMeasurement: " + JSON.stringify(newMeasurement))
+    function showMeasurement(id: string) {
+        const navLink = `/measurements/${id}`
+        navigate(navLink)
+    }
 
-    var result = client.models.Measurement.create(newMeasurement);
+    return (
+      	<>
+        	  <ul className="entryList">
+            {measurements.map(measurement => {
+                const inputElementId = "id-{measurement.id}"
+                const valueImagePath = valueImagePaths[measurement.value]
+                const valueDescription = valueDescriptions[measurement.value]
 
-    console.log("New measurement request sent")
-
-    result.then(returnedData => {
-      console.log("Returned data: " + JSON.stringify(returnedData))
-    })
-  }
-
-  function showMeasurement(id: string) {
-    const navLink = `/measurements/${id}`
-    navigate(navLink)
-  }
-
-  return (
-  	<>
-	  <ul className="entryList">
-	    {measurements.map(measurement => {
-        const inputElementId = "id-{measurement.id}"
-        const valueImagePath = valueImagePaths[measurement.value]
-        const valueDescription = valueDescriptions[measurement.value]
-
-        return <li
-                  className="entryListElement"
-                  onClick={() => showMeasurement(measurement.id)}
-                  key={measurement.id}>
-                  <div>
-                    <p className="measurementDateTime">{dateToString(measurement.dateTime)}</p>
-                    <p><span className="measurementValue"><img src={valueImagePath} alt={valueDescription}/></span></p>
-                    <p className="measurementComment">{measurement.comment}</p>
-                    <div style={{clear: 'both'}}/>
-                  </div>
-            </li>
-        }
-	   )}
-	  </ul>
-	  <button onClick={createMeasurement}>+</button>
-	  <nav>
-    	<NavLink to="/measurements/new" end>Dodaj nowy pomiar</NavLink>
-      </nav>
+                return <li
+                        className="entryListElement"
+                        onClick={() => showMeasurement(measurement.id)}
+                        key={measurement.id}>
+                        <div>
+                            <p className="measurementDateTime">{dateToString(measurement.dateTime)}</p>
+                            <p><span className="measurementValue"><img src={valueImagePath} alt={valueDescription}/></span></p>
+                            <p className="measurementComment">{measurement.comment}</p>
+                            <div style={{clear: 'both'}}/>
+                        </div>
+                      </li>
+                }
+	          )}
+	      </ul>
+        <button onClick={createMeasurement}>+</button>
     </>
   );
-
 }
 
 export default MeasurementList;
