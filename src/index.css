@@ -2,7 +2,6 @@ body {
   margin: 0;
   color: white;
   background: black;
-  display: flex;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   height: 100vh;
   width: 100vw;
@@ -10,8 +9,6 @@ body {
 }
 
 main {
-  flex-direction: column;
-  align-items: stretch;
 }
 
 h1 {
@@ -46,8 +43,6 @@ ul {
   margin-block-start: 0;
   margin-block-end: 0;
   list-style-type: none;
-  display: flex;
-  flex-direction: column;
   margin: 8px 0;
   border: 1px solid black;
   gap: 1px;
@@ -90,24 +85,40 @@ ul {
   font-size: 20px;
 }
 
+.measurementValue img {
+  height: 48px;
+}
+
 .measurementComment {
   margin-left: 5px;
   margin-right: 5px;
 }
 
-label {
+.label {
   font-weight: bold;
+  clear: both;
+  margin-top: 12px;
 }
 
 p {
   margin: 0;
-  margin-bottom: 16px;
 }
 
 .verticalRadio {
-  display: inline-box;
   width: 32px;
   text-align: center;
+  float: left;
+}
+
+.radioIcon {
+  height: 24px;
+}
+
+.newMeasurementTextArea {
+  width: 100%;
+ -webkit-box-sizing: border-box;
+ -moz-box-sizing: border-box;
+ box-sizing: border-box;
 }
 
 #dyspnoeaNone {
@@ -143,3 +154,4 @@ a {
 h1 {
   font-size: 12pt;
 }
+

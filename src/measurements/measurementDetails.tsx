@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink, useParams } from "react-router";
-import type { Route } from "./+types/home";
+// import type { Route } from "./+types/home";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { dateToString } from "../utils/dateUtils";
@@ -32,20 +32,23 @@ function MeasurementDetails() {
 		</>
 	} else {
 		console.log("measurement.date = " + measurement.dateTime)
-		return <div class="entryDetails">
-			<label>Data i godzina pomiaru</label>
-			<p>{dateToString(measurement.dateTime)}</p>
+		return <>
+			<div className="entryDetails">
+				<p className="label">Data i godzina pomiaru</p>
+				<p>{dateToString(measurement.dateTime)}</p>
 
-			<label>Poziom duszności</label>
-			<p>{valueDescriptions[measurement.value]}</p>
+				<p className="label">Poziom duszności</p>
+				<p>{valueDescriptions[measurement.value]}</p>
+				<img src={valueImagePaths[measurement.value]} alt={valueDescriptions[measurement.value]}/>
 
-			<label>Okoliczności</label>
-			<p>{measurement.comment}</p>
+				<p className="label">Okoliczności</p>
+				<p>{measurement.comment}</p>
+			</div>
 
 			<nav>
 		  		<NavLink to="/measurements" end>Powrót na listę pomiarów</NavLink>
 			</nav>
-		</div>
+		</>
 	}
 }
 

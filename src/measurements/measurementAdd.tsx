@@ -17,32 +17,27 @@ function MeasurementDetails() {
 	const currentDateTime = new Date().toISOString().split(".")[0]
 	console.log(currentDateTime)
 
-	return <div className="entryDetails">
-		<label>Data i godzina pomiaru</label>
-		<p><input aria-label="Date and time" type="datetime-local" defaultValue={currentDateTime}/></p>
+	return <>
+		<div className="entryDetails">
+			<p class="label">Data i godzina pomiaru</p>
+			<p><input aria-label="Date and time" type="datetime-local" defaultValue={currentDateTime}/></p>
 
-		<label>Poziom duszności</label>
-		<p>
-			<div className="verticalRadio"><input type="radio" name="test" value="small"/><span>{valueDescriptions[0]}</span><img src={valueImagePaths[0]} alt={valueDescriptions[0]}/></div>
-			<div className="verticalRadio"><input type="radio" name="test" value="small"/><span>{valueDescriptions[1]}</span><img src={valueImagePaths[1]} alt={valueDescriptions[1]}/></div>
-			<div className="verticalRadio"><input type="radio" name="test" value="small"/><span>{valueDescriptions[2]}</span><img src={valueImagePaths[2]} alt={valueDescriptions[2]}/></div>
-			<div className="verticalRadio"><input type="radio" name="test" value="small"/><span>{valueDescriptions[3]}</span><img src={valueImagePaths[3]} alt={valueDescriptions[3]}/></div>
-		</p>
+			<p class="label">Poziom duszności</p>
+			<div>
+				<p><input type="radio" name="test" value="0"/>&nbsp;<img class="radioIcon" src={valueImagePaths[0]} alt={valueDescriptions[0]}/>&nbsp;<span>{valueDescriptions[0]}</span></p>
+				<p><input type="radio" name="test" value="1"/>&nbsp;<img class="radioIcon" src={valueImagePaths[1]} alt={valueDescriptions[1]}/> <span>{valueDescriptions[1]}</span></p>
+				<p><input type="radio" name="test" value="2"/>&nbsp;<img class="radioIcon"src={valueImagePaths[2]} alt={valueDescriptions[2]}/> <span>{valueDescriptions[2]}</span></p>
+				<p><input type="radio" name="test" value="3"/>&nbsp;<img class="radioIcon"src={valueImagePaths[3]} alt={valueDescriptions[3]}/> <span>{valueDescriptions[3]}</span></p>
+			</div>
 
-		{[0,1,2,3].forEach(idx => {
-			const imagePath = valueImagePaths[idx]
-			console.log("Image " + idx + ": " + imagePath)
-			return <p><img src="/src/assets/dyspnoeaNone.png"></img></p>
-		})}
+			<p class="label">Okoliczności</p>
+			<p><textarea className="newMeasurementTextArea" rows="5"></textarea></p>
 
-
-		<label>Okoliczności</label>
-		<p><textarea></textarea></p>
-
+		</div>
 		<nav>
 	  		<NavLink to="/measurements" end>Powrót na listę pomiarów</NavLink>
 		</nav>
-	</div>
+	</>
 }
 
 export default MeasurementDetails;

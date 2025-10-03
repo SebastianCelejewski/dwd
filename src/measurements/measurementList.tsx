@@ -56,8 +56,12 @@ function MeasurementList() {
                   className="entryListElement"
                   onClick={() => showMeasurement(measurement.id)}
                   key={measurement.id}>
-              <p><span className="measurementDateTime">{dateToString(measurement.dateTime)}</span><span className="measurementValue"><img src={valueImagePath} alt={valueDescription}/></span></p>
-              <p className="measurementComment">{measurement.comment}</p>
+                  <div>
+                    <p className="measurementDateTime">{dateToString(measurement.dateTime)}</p>
+                    <p><span className="measurementValue"><img src={valueImagePath} alt={valueDescription}/></span></p>
+                    <p className="measurementComment">{measurement.comment}</p>
+                    <div style={{clear: 'both'}}/>
+                  </div>
             </li>
         }
 	   )}
