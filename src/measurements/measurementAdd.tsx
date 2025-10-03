@@ -19,20 +19,20 @@ function MeasurementAdd() {
     const [measurementValue, setMeasurementValue] = useState(0);
     const [measurementComment, setMeasurementComment] = useState("");
 
-    function handleMeasurementValueChange(e: typeof event) {
+    function handleMeasurementValueChange(e: any) {
         console.log(e)
         setMeasurementValue(e.target.value);
     }
 
-    function handleMeasurementCommentChange(e: typeof event) {
+    function handleMeasurementCommentChange(e: any) {
         setMeasurementComment(e.target.value);
     }
 
-      function handleMeasurementDateTimeChange(e: typeof event) {
+      function handleMeasurementDateTimeChange(e: any) {
           setMeasurementDateTime(e.target.value)
     }
 
-    function handleSubmit(e: typeof event) {
+    function handleSubmit(e: any) {
         e.preventDefault();
 
         const newMeasurement = {
