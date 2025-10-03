@@ -8,13 +8,20 @@ import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 
 const client = generateClient<Schema>();
 
+class MeasurementQueryResult {
+  data: Array<Schema["Measurement"]["type"]>
+}
+
 function MeasurementList() {
     const [measurements, setMeasurements] = useState<Array<Schema["Measurement"]["type"]>>([]);
     const navigate = useNavigate();
     
     useEffect(() => {
         client.models.Measurement.observeQuery({}).subscribe({
-            next: (data: object) => setMeasurements([...data.items]),
+            next: (data: MeasurementQueryResult) => { 
+              console.log(JSON.stringify(data));
+              setMeasurements([...data.items])
+            }
         });
     }, []);
 
