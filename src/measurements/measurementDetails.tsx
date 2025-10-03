@@ -18,7 +18,7 @@ function MeasurementDetails() {
         return await client.models.Measurement.get({ id: measurementId });
     }
 
-    if (measurement == undefined) {
+    if (measurement == undefined && measurementIdParam != undefined) {
         getMeasurement(measurementIdParam).then((result) => {
             setMeasurement(result["data"])
         })
