@@ -20,7 +20,6 @@ function MeasurementAdd() {
     const [measurementComment, setMeasurementComment] = useState("");
 
     function handleMeasurementValueChange(e: any) {
-        console.log(e)
         setMeasurementValue(e.target.value);
     }
 
@@ -41,7 +40,6 @@ function MeasurementAdd() {
             comment: measurementComment
         }
 
-        console.log("Request: " + JSON.stringify(newMeasurement))
         const result = client.models.Measurement.create(newMeasurement);
 
         result.then(returnedData => {

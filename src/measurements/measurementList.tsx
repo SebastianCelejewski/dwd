@@ -19,7 +19,6 @@ function MeasurementList() {
     useEffect(() => {
         client.models.Measurement.observeQuery({}).subscribe({
             next: (data: MeasurementQueryResult) => { 
-              console.log(JSON.stringify(data));
               setMeasurements([...data.items])
             }
         });
