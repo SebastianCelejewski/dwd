@@ -26,7 +26,6 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   color: white;
-  position: absolute;
   right: 0;
   bottom: 0;
 }

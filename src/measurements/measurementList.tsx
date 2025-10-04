@@ -1,5 +1,4 @@
 import type { Schema } from "../../amplify/data/resource";
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { generateClient } from "aws-amplify/data";
@@ -12,14 +11,20 @@ class MeasurementQueryResult {
   items: Array<Schema["Measurement"]["type"]> = []
 }
 
+function sortByDateTime(measurements: Array<Schema["Measurement"]["type"]>) {
+    return measurements.sort((a, b) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime());
+}
+
 function MeasurementList() {
     const [measurements, setMeasurements] = useState<Array<Schema["Measurement"]["type"]>>([]);
     const navigate = useNavigate();
     
     useEffect(() => {
-        client.models.Measurement.observeQuery({}).subscribe({
+        client.models.Measurement.observeQuery({
+            authMode: 'userPool',
+        }).subscribe({
             next: (data: MeasurementQueryResult) => { 
-              setMeasurements([...data.items])
+              setMeasurements(sortByDateTime([...data.items]))
             }
         });
     }, []);
@@ -55,7 +60,7 @@ function MeasurementList() {
                 }
             )}
           </ul>
-        <button onClick={createMeasurement}>+</button>
+        <button onClick={createMeasurement}>Dodaj pomiar</button>
     </>
   );
 }
