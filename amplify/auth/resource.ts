@@ -5,4 +5,10 @@ export const auth = defineAuth({
     email: true,
     phone: true,
   },
+  userAttributes: {
+    nickname: {
+      mutable: true,
+      required: true
+    }
+  }
 });
