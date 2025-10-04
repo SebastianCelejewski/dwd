@@ -12,7 +12,7 @@ const { cfnUserPool } = backend.auth.resources.cfnResources;
 // modify cfnUserPool policies directly
 cfnUserPool.policies = {
   passwordPolicy: {
-    minimumLength: 3,
+    minimumLength: 6,
     requireLowercase: false,
     requireNumbers: false,
     requireSymbols: false,
