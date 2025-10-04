@@ -46,7 +46,6 @@ function MeasurementAdd() {
         });
 
         result.then(returnedData => {
-            console.log("Response: " + JSON.stringify(returnedData))
             navigate("/measurements")
         })
     }

@@ -21,7 +21,7 @@ function MeasurementDetails() {
     }
 
     async function getMeasurement(measurementId: string) {
-        return await client.models.Measurement.get({ id: measurementId });
+        return await client.models.Measurement.get({ id: measurementId }, { authMode: 'userPool' });
     }
 
     if (measurement == undefined && measurementIdParam != undefined) {
