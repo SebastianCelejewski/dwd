@@ -62,10 +62,10 @@ function MeasurementAdd() {
 
                 <p className="label">Poziom duszności</p>
                 <div>
-                    <p><input type="radio" name="measurementValue" value="0" onChange={handleMeasurementValueChange} defaultChecked/>&nbsp;<img className="radioIcon" src={valueImagePaths[0]} alt={valueDescriptions[0]}/>&nbsp;<span>{valueDescriptions[0]}</span></p>
-                    <p><input type="radio" name="measurementValue" value="1" onChange={handleMeasurementValueChange}/>&nbsp;<img className="radioIcon" src={valueImagePaths[1]} alt={valueDescriptions[1]}/> <span>{valueDescriptions[1]}</span></p>
-                    <p><input type="radio" name="measurementValue" value="2" onChange={handleMeasurementValueChange}/>&nbsp;<img className="radioIcon" src={valueImagePaths[2]} alt={valueDescriptions[2]}/> <span>{valueDescriptions[2]}</span></p>
-                    <p><input type="radio" name="measurementValue" value="3" onChange={handleMeasurementValueChange}/>&nbsp;<img className="radioIcon" src={valueImagePaths[3]} alt={valueDescriptions[3]}/> <span>{valueDescriptions[3]}</span></p>
+                    <p><label><input type="radio" name="measurementValue" value="0" onChange={handleMeasurementValueChange} defaultChecked/>&nbsp;<img className="radioIcon" src={valueImagePaths[0]} alt={valueDescriptions[0]}/>&nbsp;<span>{valueDescriptions[0]}</span></label></p>
+                    <p><label><input type="radio" name="measurementValue" value="1" onChange={handleMeasurementValueChange}/>&nbsp;<img className="radioIcon" src={valueImagePaths[1]} alt={valueDescriptions[1]}/> <span>{valueDescriptions[1]}</span></label></p>
+                    <p><label><input type="radio" name="measurementValue" value="2" onChange={handleMeasurementValueChange}/>&nbsp;<img className="radioIcon" src={valueImagePaths[2]} alt={valueDescriptions[2]}/> <span>{valueDescriptions[2]}</span></label></p>
+                    <p><label><input type="radio" name="measurementValue" value="3" onChange={handleMeasurementValueChange}/>&nbsp;<img className="radioIcon" src={valueImagePaths[3]} alt={valueDescriptions[3]}/> <span>{valueDescriptions[3]}</span></label></p>
                 </div>
 
                 <p className="label">Okoliczności</p>
