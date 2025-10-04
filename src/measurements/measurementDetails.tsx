@@ -20,7 +20,9 @@ function MeasurementDetails() {
 
     if (measurement == undefined && measurementIdParam != undefined) {
         getMeasurement(measurementIdParam).then((result) => {
-            setMeasurement(result["data"])
+            if (result["data"] != undefined) {
+                setMeasurement(result["data"])
+            }
         })
     }
 

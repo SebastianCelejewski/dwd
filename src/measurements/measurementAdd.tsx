@@ -36,7 +36,7 @@ function MeasurementAdd() {
         e.preventDefault();
 
         const newMeasurement = {
-            dateTime: new Date(measurementDateTime),
+            dateTime: new Date(measurementDateTime).toISOString(),
             value: measurementValue,
             comment: measurementComment
         }
