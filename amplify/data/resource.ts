@@ -15,9 +15,9 @@ const schema = a.schema({
     .authorization((allow) => [allow.publicApiKey()]),
   Measurement: a
     .model({
-      dateTime: a.datetime()!,
-      value: a.integer()!,
-      comment: a.string()!
+      dateTime: a.datetime().required(),
+      value: a.integer().required(),
+      comment: a.string().required()
     })
     .authorization((allow) => [allow.publicApiKey()])
 });
