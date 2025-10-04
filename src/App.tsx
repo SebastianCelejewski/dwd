@@ -1,37 +1,22 @@
-import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
+import { BrowserRouter, Routes, Route } from "react-router";
 
-const client = generateClient<Schema>();
+import MeasurementList from "./measurements/measurementList.tsx"
+import MeasurementDetails from "./measurements/measurementDetails.tsx"
+import MeasurementAdd from "./measurements/measurementAdd.tsx"
 
 function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Nowy pomiar") });
-  }
-
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({id})
-  }
 
   return (
     <main>
       <h1>Duszności Wczesnej Dorosłości</h1>
-      <ul>
-        {todos.map(todo => <li 
-            onClick={() => deleteTodo(todo.id)}
-            key={todo.id}>
-            {todo.content}
-          </li>)}
-      </ul>
-      <button onClick={createTodo}>+</button>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MeasurementList />} />
+          <Route path="/measurements" element={<MeasurementList />} />
+          <Route path="/measurements/new" element={<MeasurementAdd />} />
+          <Route path="/measurements/:id" element={<MeasurementDetails />} />
+        </Routes>
+      </BrowserRouter>
     </main>
   );
 }

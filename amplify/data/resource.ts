@@ -13,6 +13,13 @@ const schema = a.schema({
       isDone: a.boolean()
     })
     .authorization((allow) => [allow.publicApiKey()]),
+  Measurement: a
+    .model({
+      dateTime: a.datetime().required(),
+      value: a.integer().required(),
+      comment: a.string().required()
+    })
+    .authorization((allow) => [allow.publicApiKey()])
 });
 
 export type Schema = ClientSchema<typeof schema>;

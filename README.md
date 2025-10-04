@@ -23,3 +23,11 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 ## License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
+
+## SC notes
+
+### Deployment of backend sandbox
+npx ampx sandbox --profile amplify-deploy
+
+### Removal of backend sandbox
+npx ampx sandbox delete --profile amplify-deploy
