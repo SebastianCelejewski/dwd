@@ -1,7 +1,7 @@
 import type { Schema } from "../../amplify/data/resource";
 
 import { useState } from "react";
-import { NavLink, useParams } from "react-router";
+import { NavLink, useParams, useNavigate } from "react-router";
 import { generateClient } from "aws-amplify/data";
 import { dateToString } from "../utils/dateUtils";
 import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
@@ -9,10 +9,16 @@ import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 const client = generateClient<Schema>();
 
 function MeasurementDetails() {
+    const navigate = useNavigate();
+
     const params = useParams();
     const measurementIdParam = params["id"]
 
     const [measurement, setMeasurement] = useState<Schema["Measurement"]["type"]>();
+
+    function handleBack(e: any) {
+        navigate("/measurements")
+    }
 
     async function getMeasurement(measurementId: string) {
         return await client.models.Measurement.get({ id: measurementId });
@@ -45,10 +51,7 @@ function MeasurementDetails() {
                 <p className="label">Okoliczności</p>
                 <p>{measurement.comment}</p>
             </div>
-
-            <nav>
-                <NavLink to="/measurements" end>Powrót na listę pomiarów</NavLink>
-            </nav>
+            <button type="button" onClick={handleBack}>Wróć</button>
         </>
     }
 }

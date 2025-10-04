@@ -58,7 +58,7 @@ function MeasurementList() {
                 }
             )}
           </ul>
-        <button onClick={createMeasurement}>+</button>
+        <button onClick={createMeasurement}>Dodaj pomiar</button>
     </>
   );
 }

@@ -8,9 +8,12 @@ import { Authenticator } from '@aws-amplify/ui-react';
 function App() {
 
   return (
-    <main>
-      <h1>Duszności Wczesnej Dorosłości</h1>
-      <Authenticator>
+    <Authenticator>
+      {({ signOut, user }) => {
+        console.log(JSON.stringify(user))
+        return ( 
+      <main>
+        <h1>Duszności Wczesnej Dorosłości</h1>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<MeasurementList />} />
@@ -19,8 +22,10 @@ function App() {
             <Route path="/measurements/:id" element={<MeasurementDetails />} />
           </Routes>
         </BrowserRouter>
-      </Authenticator>
-    </main>
+        <button onClick={signOut}>Wyloguj się</button>
+      </main>
+    )}}
+    </Authenticator>
   );
 }
 

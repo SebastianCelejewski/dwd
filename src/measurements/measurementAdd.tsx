@@ -1,19 +1,19 @@
 import type { Schema } from "../../amplify/data/resource";
 
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { generateClient } from "aws-amplify/data";
 import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 
 const client = generateClient<Schema>();
 
 function MeasurementAdd() {
+    const navigate = useNavigate();
+
     const currentDateTimeUTC = new Date()
     const timeZoneOffset = currentDateTimeUTC.getTimezoneOffset()
     const currentDateTimeLocal = new Date(currentDateTimeUTC.getTime() - timeZoneOffset * 60 * 1000)
     const currentDateTime = currentDateTimeLocal.toISOString().split(".")[0]
-
-    const navigate = useNavigate();
 
     const [measurementDateTime, setMeasurementDateTime] = useState(currentDateTime);
     const [measurementValue, setMeasurementValue] = useState(0);
@@ -48,6 +48,10 @@ function MeasurementAdd() {
         })
     }
 
+    function handleCancel(e: any) {
+        navigate("/measurements")
+    }
+
     return <>
         <form onSubmit={handleSubmit}>
             <div className="entryDetails">
@@ -71,12 +75,9 @@ function MeasurementAdd() {
                 <p className="label">Okoliczności</p>
                 <p><textarea id="measurementComment" className="newMeasurementTextArea" rows={5} onChange={handleMeasurementCommentChange}/></p>
             </div>
-            <button type="submit">Dodaj</button>
+            <button type="submit">Zatwierdź</button>
+            <button type="button" onClick={handleCancel}>Anuluj</button>
         </form>
-    
-        <nav>
-            <NavLink to="/measurements" end>Powrót na listę pomiarów</NavLink>
-        </nav>
     </>
 }
 
