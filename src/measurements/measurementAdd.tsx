@@ -1,4 +1,4 @@
-import type { Schema } from "../amplify/data/resource";
+import type { Schema } from "../../amplify/data/resource";
 
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";

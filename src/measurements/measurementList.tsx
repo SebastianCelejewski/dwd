@@ -1,4 +1,4 @@
-import type { Schema } from "../amplify/data/resource";
+import type { Schema } from "../../amplify/data/resource";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
@@ -9,7 +9,7 @@ import { valueImagePaths, valueDescriptions } from "../utils/descriptions";
 const client = generateClient<Schema>();
 
 class MeasurementQueryResult {
-  items: Array<Schema["Measurement"]["type"]>
+  items: Array<Schema["Measurement"]["type"]> = []
 }
 
 function MeasurementList() {
