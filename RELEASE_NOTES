@@ -1,0 +1,8 @@
+# Release Notes
+
+## Version dwd_0.1.0
+- Initial implementation allowing to view and add measurements
+- A measurement has its date and time, dyspnoea value (0: none, 1: low, 2: medium, 3: high) and a comment
+- There is no authentication or authorization
+- Works as a web application on mobile phones
+- Code is unfortunately low quality, because those are my first steps in React and AWS Amplify
