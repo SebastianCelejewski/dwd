@@ -20,7 +20,9 @@ function MeasurementList() {
     const navigate = useNavigate();
     
     useEffect(() => {
-        client.models.Measurement.observeQuery({}).subscribe({
+        client.models.Measurement.observeQuery({
+            authMode: 'userPool',
+        }).subscribe({
             next: (data: MeasurementQueryResult) => { 
               setMeasurements(sortByDateTime([...data.items]))
             }

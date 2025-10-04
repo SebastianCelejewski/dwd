@@ -40,7 +40,10 @@ function MeasurementAdd() {
             comment: measurementComment
         }
 
-        const result = client.models.Measurement.create(newMeasurement);
+        const result = client.models.Measurement.create(newMeasurement,   
+        {
+            authMode: 'userPool',
+        });
 
         result.then(returnedData => {
             console.log("Response: " + JSON.stringify(returnedData))
