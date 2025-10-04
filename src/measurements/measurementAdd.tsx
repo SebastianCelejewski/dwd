@@ -48,7 +48,7 @@ function MeasurementAdd() {
         })
     }
 
-    function handleCancel(e: any) {
+    function handleCancel() {
         navigate("/measurements")
     }
 

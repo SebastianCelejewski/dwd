@@ -16,7 +16,7 @@ function MeasurementDetails() {
 
     const [measurement, setMeasurement] = useState<Schema["Measurement"]["type"]>();
 
-    function handleBack(e: any) {
+    function handleBack() {
         navigate("/measurements")
     }
 
