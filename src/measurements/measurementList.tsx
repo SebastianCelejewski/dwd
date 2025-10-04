@@ -12,6 +12,10 @@ class MeasurementQueryResult {
   items: Array<Schema["Measurement"]["type"]> = []
 }
 
+function sortByDateTime(measurements: Array<Schema["Measurement"]["type"]>) {
+    return measurements.sort((a, b) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime());
+}
+
 function MeasurementList() {
     const [measurements, setMeasurements] = useState<Array<Schema["Measurement"]["type"]>>([]);
     const navigate = useNavigate();
@@ -19,7 +23,7 @@ function MeasurementList() {
     useEffect(() => {
         client.models.Measurement.observeQuery({}).subscribe({
             next: (data: MeasurementQueryResult) => { 
-              setMeasurements([...data.items])
+              setMeasurements(sortByDateTime([...data.items]))
             }
         });
     }, []);
