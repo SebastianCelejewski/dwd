@@ -45,7 +45,7 @@ function MeasurementAdd() {
             authMode: 'userPool',
         });
 
-        result.then(returnedData => {
+        result.then(() => {
             navigate("/measurements")
         })
     }
