@@ -8,7 +8,18 @@ body {
   justify-content: center;
 }
 
-main {
+.subheader {
+  font-size: smaller;
+  margin-left: 6px;
+  margin-right: 6px
+}
+
+.userInfo {
+  float: left
+}
+
+.versionInfo {
+  float: right
 }
 
 h1 {
