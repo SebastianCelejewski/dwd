@@ -53,10 +53,11 @@ ul {
 .entryList {
   background-color: white;
   overflow: scroll;
+  height: 80vh;
 }
 
 .entryListElement {
-  order-radius: 8px;
+  border-radius: 8px;
   margin: 5px;
   padding: 2px;
   color: black;
