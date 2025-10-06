@@ -9,15 +9,13 @@ import { useState} from 'react'
 
 function App() {
 
-  const [userNickname, setUserNickname] = useState<string>([]);
+  const [userNickname, setUserNickname] = useState<string>("");
 
   function getUserNickname() {
     fetchUserAttributes().then((attributes) => {
-      console.log(attributes.nickname)
       if (attributes.nickname === undefined) {
-        setUserNickname("Anonim")
-      } else
-      {
+        setUserNickname("")
+      } else {
         setUserNickname(attributes.nickname)
       }
     })
@@ -27,7 +25,7 @@ function App() {
 
   return (
     <Authenticator>
-      {({ signOut, user }) => {
+      {({ signOut }) => {
         return ( 
           <main>
             <h1>Duszności Wczesnej Dorosłości</h1>
